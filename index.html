@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Amor Eterno ✨</title>
+    <style>
+        :root {
+            --color-principal: #ff4d6d;
+            --color-fondo: #fff5f7;
+            --fuente-amor: 'Georgia', serif;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Lluvia de corazones de fondo */
+        .corazon-caido {
+            position: fixed;
+            top: -10%;
+            color: var(--color-principal);
+            font-size: 20px;
+            user-select: none;
+            z-index: -1;
+            animation: caida linear forwards;
+        }
+
+        @keyframes caida {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Contador de tiempo */
+        .contador-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            border: 1px solid #ffccd5;
+            width: 85%;
+            max-width: 400px;
+        }
+
+        .tiempo {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .unidad { font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: bold; }
+        .numero { 
+            font-size: 1.6rem; 
+            font-weight: bold; 
+            color: var(--color-principal); 
+            display: block;
+            text-shadow: 0 0 5px rgba(255, 77, 109, 0.3);
+        }
+
+        /* Tarjeta Central */
+        .tarjeta {
+            background: white;
+            width: 85%;
+            max-width: 450px;
+            margin: 30px auto;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            border: 2px solid white;
+        }
+
+        .header-foto {
+            background: linear-gradient(135deg, #ffb3c1, #ff4d6d);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+
+        .contenido { padding: 30px; text-align: center; }
+
+        h1 { color: var(--color-principal); font-family: var(--fuente-amor); font-size: 1.8rem; }
+
+        .frase-dia {
+            background: #fff0f3;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #594d5b;
+            font-size: 0.95rem;
+        }
+
+        /* Botón Mágico */
+        .boton-magico {
+            background: var(--color-principal);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            font-weight: bold;
+        }
+
+        .boton-magico:hover { transform: scale(1.05); background: #ff758f; }
+
+        #secret {
+            display: none;
+            margin-top: 20px;
+            color: var(--color-principal);
+            font-weight: bold;
+            font-size: 1.1rem;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="contador-container">
+        <h2 style="font-size: 1rem; color: #555; margin: 0;">Nuestra historia comenzó el 18 de febrero:</h2>
+        <div class="tiempo" id="timer">
+            <div><span class="numero" id="dias">0</span><span class="unidad">Días</span></div>
+            <div><span class="numero" id="horas">0</span><span class="unidad">Hrs</span></div>
+            <div><span class="numero" id="minutos">0</span><span class="unidad">Min</span></div>
+            <div><span class="numero" id="segundos">0</span><span class="unidad">Seg</span></div>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div class="header-foto">💖🌸✨</div>
+        <div class="contenido">
+            <h1>Para mi persona favorita</h1>
+            <p>Hice esta página para que nunca olvides lo especial que eres para mí.</p>
+            
+            <div class="frase-dia">
+                "Desde aquel 18 de febrero, mi mundo es mucho más bonito porque estás tú en él."
+            </div>
+
+            <button class="boton-magico" onclick="mostrarSecreto()">Toca para un mensaje secreto</button>
+            <p id="secret">¡Eres lo mejor que me ha pasado! Te quiero muchísimo. 😍</p>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN DE LA FECHA: 18 de febrero de 2026
+        const fechaInicio = new Date("2026-02-18T00:00:00"); 
+
+        function actualizarContador() {
+            const ahora = new Date();
+            const diferencia = ahora - fechaInicio;
+
+            // Cálculos matemáticos para el tiempo
+            const d = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diferencia / (1000 * 60)) % 60);
+            const s = Math.floor((diferencia / 1000) % 60);
+
+            document.getElementById('dias').innerText = d;
+            document.getElementById('horas').innerText = h;
+            document.getElementById('minutos').innerText = m;
+            document.getElementById('segundos').innerText = s;
+        }
+
+        // Actualizar cada segundo
+        setInterval(actualizarContador, 1000);
+        actualizarContador(); // Ejecutar una vez al inicio
+
+        function mostrarSecreto() {
+            document.getElementById('secret').style.display = 'block';
+        }
+
+        // Lluvia de corazones automática
+        function crearCorazon() {
+            const corazon = document.createElement('div');
+            corazon.classList.add('corazon-caido');
+            corazon.innerHTML = '❤️';
+            corazon.style.left = Math.random() * 100 + 'vw';
+            corazon.style.animationDuration = Math.random() * 3 + 2 + 's';
+            corazon.style.opacity = Math.random();
+            document.body.appendChild(corazon);
+
+            setTimeout(() => { corazon.remove(); }, 5000);
+        }
+
+        setInterval(crearCorazon, 400);
+    </script>
+</body>
+</html>
